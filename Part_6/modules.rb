@@ -1,14 +1,13 @@
 module CompanyName
+  attr_accessor :company_name
+
   def production(company)
     self.company_name = company
   end
 
   def brand
     self.company_name
-  end
-
-  protected
-  attr_accessor :company_name
+  end  
 end
 
 module InstanceCounter
