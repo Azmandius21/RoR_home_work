@@ -85,20 +85,20 @@ class Train
   end
 
   def next_station
-    route.stations[current_station_index+1] if route.stations[current_station_index]==route.stations[last]
+    route.stations[current_station_index+1] if route.stations[current_station_index]==route.stations.last
   end
 
   def previouss_station
-    route.stations[current_station_index-1] if route.stations[current_station_index]==route.stations[first]
+    route.stations[current_station_index-1] if route.stations[current_station_index]==route.stations.first
   end
 
   #Changing current station of train by next on the route
   def go_next_station
-    @current_station_index += 1 if route.stations[current_station_index]==route.stations[last]
+    @current_station_index += 1 if route.stations[current_station_index]==route.stations.last
   end
 
   #Changing current station of train by previous on the route
   def go_previous_station
-    @current_station_index -= 1 if route.stations[current_station_index]==route.stations[first]
+    @current_station_index -= 1 if route.stations[current_station_index]==route.stations.first
   end
 end
