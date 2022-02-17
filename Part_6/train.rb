@@ -7,13 +7,8 @@ class Train #Методы данного класса должны быть пу
 
   @@instances = []
 
-  def self.finde(number)
-    @@instances.each do |train|
-      if train.number == number
-        return train
-      else return nil
-      end
-    end
+  def self.find(number)
+    @@instances.detect {|train| train.number == number}
   end
 
   def initialize(number)
@@ -26,7 +21,7 @@ class Train #Методы данного класса должны быть пу
     register_instance
   end
 
-  def name
+  def train_number
     puts "#{number} | type:#{type} | wagons :#{wagons.size}"
   end
 
