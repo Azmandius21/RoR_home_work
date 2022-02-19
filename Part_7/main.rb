@@ -19,28 +19,18 @@ class RailRoad
     @routes = []
   end
 
-=begin
-  def seed
-    self.stations = stations + [Station.new("Moscow") , Station.new("Kazan") , Station.new("Irkutsk"), Station.new("Ekaterinburg"),Station.new("Tumen")]
-    self.trains = trains + [PassengerTrain.new(100),PassengerTrain.new(200), PassengerTrain.new(300), CargoTrain.new(500), CargoTrain.new(600), CargoTrain.new(700)]
-  end
-=end
-
   def menu
-    puts "---------------------------------"
     puts "What do you want to do?
 1 - create stations,trains,routes
 2 - managing of the trains and routes
 3 - take info about stations,trains,routes
 0 - close this program
---------------------------------------------"
     case gets.chomp.to_i
     when 1 then create
     when 2 then manage
     when 3 then info
     when 0 then puts "program has been closed"
     else
-      puts "You should select and put a number"
       menu
     end
   end
@@ -49,13 +39,11 @@ private #все последующие методы могут быть прив
           #управляющую программу "menu"
 
   def create
-    puts "---------------------------------"
     puts "1 - create station
 2 - create  train
 3 - create route
 0 - close this program
 11 - go to main menu"
-    puts "---------------------------------"
     case gets.chomp.to_i
     when 1 then create_station
     when 2
@@ -69,7 +57,6 @@ private #все последующие методы могут быть прив
     when 0 then puts "program has been closed"
     when 11 then menu
     else
-      puts "You should select and put a number"
       create
     end
 
@@ -109,14 +96,12 @@ private #все последующие методы могут быть прив
   end
 
   def manage
-    puts "---------------------------------"
     puts "What do you want to do with train?"
     puts "1 - assign a route to this train
 2 - manage trains
 3 - manage routes
 0 - close this program
 11 - back to main menu"
-    puts "---------------------------------"
     case gets.chomp.to_i
     when 1
       assign_route_to_train
@@ -128,8 +113,6 @@ private #все последующие методы могут быть прив
       menu
     when 0
       puts "program has been closed"
-    else
-      puts "You should select and put a number"
     end
   end
 
@@ -139,14 +122,12 @@ private #все последующие методы могут быть прив
   end
 
   def manage_trains
-    puts "---------------------------------"
     puts "1 - add wagon to the train
 2 - remove wagon from the train
 3 - move the train to the next station
 4 - move the train to the previous station
 11 - go to main menu
 0 - close this program"
-    puts "---------------------------------"
     case gets.chomp.to_i
     when 1 then add_wagon_to_train
     when 2 then remove_wagon_from_train
@@ -154,7 +135,8 @@ private #все последующие методы могут быть прив
     when 4 then move_train_previous_station
     when 0 then puts "program has been closed"
     when 11 then menu
-    else manage_trains
+    else
+       manage_trains
     end
   end
 
@@ -163,7 +145,8 @@ private #все последующие методы могут быть прив
     case gets.chomp.to_sym
     when :passenger then PassengerWagon.new
     when :cargo then CargoWagon.new
-    else "You should put a type of wagon"
+    else
+      puts "You should put a type of wagon"
     end
   end
 
@@ -188,18 +171,17 @@ private #все последующие методы могут быть прив
   end
 
   def manage_routes
-    puts "---------------------------------"
     puts "1 - add the stattion to the route
 2 - remove the station from the route
 11 - go to back
 0 - close this program"
-    puts "---------------------------------"
     case gets.chomp.to_i
     when 1 then add_station_to_route
     when 2 then remove_station_from_route
     when 0 then puts "program has been closed"
     when 11 then manage
-    else manage_routes
+    else
+      manage_routes
     end
   end
 
@@ -214,20 +196,19 @@ private #все последующие методы могут быть прив
   end
 
   def info
-    puts "---------------------------------"
     puts "1 - info station
 2 - info  train
 3 - info route
 0 - close this program
 11 - go to main menu"
-    puts "---------------------------------"
     case gets.chomp.to_i
     when 1 then info_stations
     when 2 then info_trains
     when 3 then info_routes
     when 0 then puts "program has been closed"
     when 11 then menu
-    else info
+    else
+      info
     end
   end
 
@@ -254,8 +235,6 @@ private #все последующие методы могут быть прив
       @trains << PassengerTrain.new(number)
     when :cargo
       @trains << CargoTrain.new(number)
-    else
-      puts "You didn't enter type of the train"
     end
     puts "#{type.to_s.capitalize()} train number #{number} created "
     create
@@ -273,31 +252,25 @@ private #все последующие методы могут быть прив
   end
 
   def info_stations
-    puts "---------------------------------"
     stations.each do |station|
       puts "#{station.name} :"
       station.trains.each{ |train| puts "#{train.number}- #{train.type}" }
     end
-    puts "---------------------------------"
     info
   end
 
   def info_trains
-    puts "---------------------------------"
     trains.each do |train|
       puts "#{train.number} |#{train.current_station} | #{train.type} | #{train.wagons.size}- wagons"
     end
-    puts "---------------------------------"
     info
   end
 
   def info_routes
-    puts "---------------------------------"
     routes.each_with_index do |route, index|
       print "#{index+1}. "
       puts " #{route.stations.each{|station| print " #{station.name} "}}"
     end
-    puts "---------------------------------"
     info
   end
 end
