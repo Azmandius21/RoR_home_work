@@ -14,10 +14,10 @@ class Station #Методы данного класса должны быть п
   end
 
   def initialize(name)
+    validate!
     @name = name
     @trains = []
     @@stations << self
-    validate!
     register_instance
   end
 
