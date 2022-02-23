@@ -3,22 +3,25 @@ require_relative 'modules'
 class Train
   include CompanyName, InstanceCounter, Validate
   attr_accessor :speed, :station, :wagons, :current_station_index
-  attr_reader :number, :route
+  attr_reader :number, :route, :type
 
   TRAIN_NUMBER = /^[a-zа-я0-9]{3}-?[a-zа-я0-9]{2}$/i
+  TYPES_TRAIN = /cargo|passenger/
+
   @@instances = []
 
   def self.find(number)
     @@instances.detect {|train| train.number == number}
   end
 
-  def initialize(number)
+  def initialize(number,type)
     @number = number
     @speed = 0
     @wagons = []
     @route = route
     @current_station_index = nil
     @@instances << self
+    @type = type
     validate!
     register_instance
   end
@@ -66,10 +69,11 @@ class Train
     self.current_station_index -= 1 if route.stations[current_station_index]!=route.stations.first
   end
 
-  private
+  protected
 
   def validate!
     raise "The number of train can't be nil" if number.nil?
     raise "Invalid number format" if number !~ TRAIN_NUMBER
+    raise "Invalid type of train" if type !~ TYPES_TRAIN
   end
 end

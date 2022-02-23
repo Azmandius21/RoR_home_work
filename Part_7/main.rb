@@ -11,8 +11,6 @@ require_relative 'modules'
 class RailRoad
   attr_accessor :trains, :stations, :routes
 
-  TYPES_TRAIN = /cargo|passenger/
-
   def initialize
     @stations = []
     @trains = []
@@ -24,7 +22,7 @@ class RailRoad
 1 - create stations,trains,routes
 2 - managing of the trains and routes
 3 - take info about stations,trains,routes
-0 - close this program
+0 - close this program"
     case gets.chomp.to_i
     when 1 then create
     when 2 then manage
@@ -220,24 +218,22 @@ private #все последующие методы могут быть прив
   end
 
   def create_train
-  begin
     puts "Enter type of train (passenger/cargo):"
-    type = gets.chomp.to_sym
-    raise "Invaliid type of train" if type.to_s !~ TYPES_TRAIN
+    type = gets.chomp
+    puts "Enter the number of train (xxx-xx or xxxxx):"
+    number = gets.chomp
+    case type.to_sym
+    when :passenger
+      @trains << PassengerTrain.new(number, type)
+    when :cargo
+      @trains << CargoTrain.new(number, type)
+    else raise "Invalid type of train"
+    end
+    puts "#{type.capitalize()} train number #{number} created "
+    create
   rescue RuntimeError => e
     puts e.message
     retry
-  end
-    puts "Enter the number of train (xxx-xx or xxxxx):"
-    number = gets.chomp
-    case type
-    when :passenger
-      @trains << PassengerTrain.new(number)
-    when :cargo
-      @trains << CargoTrain.new(number)
-    end
-    puts "#{type.to_s.capitalize()} train number #{number} created "
-    create
   end
 
   def create_route
@@ -274,6 +270,3 @@ private #все последующие методы могут быть прив
     info
   end
 end
-
-rr = RailRoad.new
-rr.menu
