@@ -14,8 +14,8 @@ class Station #Методы данного класса должны быть п
   end
 
   def initialize(name)
-    validate!
     @name = name
+    validate!
     @trains = []
     @@stations << self
     register_instance
@@ -39,7 +39,11 @@ class Station #Методы данного класса должны быть п
   private
 
   def validate!
-    raise "Station station can't be nil" if name.nil?
-    raise "Invalid station name" if name !~ STATION_NAME
+    errors = []
+    errors << "Station station can't be nil" if name.nil?
+    errors << "Invalid station name" if name !~ STATION_NAME
+    errors << "Invalid number of characters , less then 2" if name.length < 2
+    errors << "First letter must be capitalize" if name !~ /^[A-ZА-Я]/
+    raise errors.join("\n") unless errors.empty?
   end
 end

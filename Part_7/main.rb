@@ -215,6 +215,9 @@ private #все последующие методы могут быть прив
     name = gets.chomp
     @stations << Station.new(name)
     create
+  rescue RuntimeError => e
+    puts e.message
+    retry
   end
 
   def create_train

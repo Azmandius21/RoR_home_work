@@ -4,8 +4,8 @@ class Route #Методы данного класса должны быть пу
 
   def initialize(first_station, last_station)
     @stations = [first_station, last_station]
-    @route_list = []
     validate!
+    @route_list = []
     register_instance
   end
 

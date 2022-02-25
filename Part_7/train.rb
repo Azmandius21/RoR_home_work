@@ -15,14 +15,14 @@ class Train
   end
 
   def initialize(number,type)
-    validate!
     @number = number
+    @type = type
+    validate!
     @speed = 0
     @wagons = []
     @route = route
     @current_station_index = nil
     @@instances << self
-    @type = type
     register_instance
   end
 
@@ -72,8 +72,10 @@ class Train
   protected
 
   def validate!
-    raise "The number of train can't be nil" if number.nil?
-    raise "Invalid number format" if number !~ TRAIN_NUMBER
-    raise "Invalid type of train" if type !~ TYPES_TRAIN
+    errors = []
+    errors << "The number of train can't be nil" if number.nil?
+    errors << "Invalid number format" if number !~ TRAIN_NUMBER
+    errors << "Invalid type of train" if type !~ TYPES_TRAIN
+    raise errors.join(",") unless errors.empty?
   end
 end
