@@ -1,24 +1,10 @@
-class PassengerWagon
-  include CompanyName
-
-  attr_accessor
-  attr_reader :seats_number, :free_seats, :type_wagon
-
-  def initialize(seats_number)
-    @seats_number = seats_number
-    @free_seats = @seats_number
+class PassengerWagon < Wagon
+  def initialize(total_place)
+    super
     @type_wagon = 'passenger'
   end
 
   def take_seat_of
-    self.free_seats -= 1 if free_seats > 0
+    self.used_place += 1 if total_place > used_place
   end
-
-  def occupied_seats
-    seats_number - free_seats
-  end
-
-  private
-
-  attr_writer :free_seats
 end

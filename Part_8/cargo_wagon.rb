@@ -1,23 +1,10 @@
-class CargoWagon
-  include CompanyName
-
-  attr_reader :overall_volume, :free_volume, :type_wagon
-
-  def initialize(overall_volume)
-    @overall_volume = overall_volume
-    @free_volume = @overall_volume
+class CargoWagon < Wagon
+  def initialize(total_place)
+    super
     @type_wagon = 'cargo'
   end
 
   def take_volume_of(volume)
-    self.free_volume -= volume if free_volume >= volume
+    self.used_place += volume if free_place >= volume
   end
-
-  def occupied_volume
-    overall_volume - free_volume
-  end
-
-  private
-
-  attr_writer :free_volume
 end

@@ -151,12 +151,12 @@ class RailRoad
     case type
     when :passenger
       puts "Enter number of seats"
-      seats_number = gets.chomp.to_i
-      PassengerWagon.new(seats_number)
+      total_place = gets.chomp.to_i
+      PassengerWagon.new(total_place)
     when :cargo
       puts "Enter overall volume of wagon"
-      overall_volume = gets.chomp.to_i
-      CargoWagon.new(overall_volume)
+      total_place = gets.chomp.to_i
+      CargoWagon.new(total_place)
     else
       puts "You should put a type of wagon"
     end
@@ -279,8 +279,8 @@ class RailRoad
     trains.each do |train|
       puts "Train number: #{train.number} | located in  #{train.current_station} | train type: #{train.type}"
       train.block_wagons do |wagon,index|
-        puts "#{index+1} #{wagon.type_wagon} wagon: #{wagon.free_seats} - free seats #{wagon.occupied_seats} - occupied seats" if train.type == 'passenger'
-        puts "#{index+1} #{wagon.type_wagon} wagon: #{wagon.free_volume} - free volume. #{wagon.occupied_volume} - occupied volume" if train.type == 'cargo'
+        puts "#{index+1} #{wagon.type_wagon} wagon: Free seats #{wagon.free_place} | Occupied seats #{wagon.used_place}" if train.type == 'passenger'
+        puts "#{index+1} #{wagon.type_wagon} wagon: Free volume #{wagon.free_place} | Occupied volume #{wagon.used_place}" if train.type == 'cargo'
       end
     end
     info
@@ -292,23 +292,5 @@ class RailRoad
       puts " #{route.stations.each{|station| print " #{station.name} "}}"
     end
     info
-  end
-
-  def all_info
-    stations.each do |station|
-      puts station.name
-      station.block_trains do |train|
-        puts "Train number #{train.number} #{train.type} type with  #{train.wagons.size} wagons :"
-        train.block_wagons do |wagon,index|
-          puts "#{index + 1} wagon #{train.type}"
-          case train.type
-          when "passenger"
-            puts "Free seats : #{wagon.free_seats}. Occupied seats : #{wagon.occupied_seats}"
-          when "cargo"
-            puts "Free volume : #{wagon.free_volume}. Occupied volume : #{wagon.occupied_volume}"
-          end
-        end
-      end
-    end
   end
 end
