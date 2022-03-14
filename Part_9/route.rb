@@ -1,4 +1,5 @@
-class Route # Методы данного класса должны быть публичны, ,так как будут вызываться не в родственных классах
+# Методы данного класса должны быть публичны, ,так как будут вызываться не в родственных классах
+class Route
   include Validate
   include InstanceCounter
   attr_reader :stations
@@ -19,7 +20,7 @@ class Route # Методы данного класса должны быть п�
   end
 
   def remove_station(station)
-    stations.delete(station) if !(station == stations[-1]) && !(station == stations[0])
+    stations.delete(station) if station != stations[-1] && station != stations[0]
   end
 
   private

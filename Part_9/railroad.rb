@@ -23,7 +23,9 @@ class RailRoad
     end
   end
 
-  private # все последующие методы могут быть приватными, так как будут вызываться исключительно внутри класса через
+  # все последующие методы могут быть приватными,
+  # так как будут вызываться исключительно внутри класса через
+  private
 
   # управляющую программу "menu"
   def create
@@ -254,12 +256,15 @@ class RailRoad
 
   def create_route
     puts 'Select first station:'
-    stations.each_with_index { |station, index| puts "#{index + 1} - #{station.name}" }
+    stations.each_with_index { |station, index| puts "#{index + 1} -\
+    #{station.name}" }
     index_of_first_station = gets.chomp.to_i - 1
     puts 'Enter last station of this route:'
-    stations.each_with_index { |station, index| puts "#{index + 1} - #{station.name}" }
+    stations.each_with_index { |station, index| puts "#{index + 1} -\
+    #{station.name}" }
     index_last_station = gets.chomp.to_i - 1
-    @routes << Route.new(stations[index_of_first_station], stations[index_last_station])
+    @routes <<
+      Route.new(stations[index_of_first_station], stations[index_last_station])
     create
   end
 
@@ -267,7 +272,8 @@ class RailRoad
     stations.each do |station|
       puts "#{station.name} :"
       station.trains.each do |train|
-        puts "Train number: #{train.number} | train type: #{train.type} | wagons number: #{train.wagons.size}"
+        puts "Train number: #{train.number}\
+        train type: #{train.type} | wagons number: #{train.wagons.size}"
       end
     end
     info
@@ -275,13 +281,16 @@ class RailRoad
 
   def info_trains
     trains.each do |train|
-      puts "Train number: #{train.number} | located in  #{train.current_station} | train type: #{train.type}"
+      puts "Train number: #{train.number} | located in
+      #{train.current_station} | train type: #{train.type}"
       train.block_wagons do |wagon, index|
         if train.type == 'passenger'
-          puts "#{index + 1} #{wagon.type_wagon} wagon: Free seats #{wagon.free_place} | Occupied seats #{wagon.used_place}"
+          puts "#{index + 1} #{wagon.type_wagon} wagon:\
+          Free seats #{wagon.free_place} | Occupied seats #{wagon.used_place}"
         end
         if train.type == 'cargo'
-          puts "#{index + 1} #{wagon.type_wagon} wagon: Free volume #{wagon.free_place} | Occupied volume #{wagon.used_place}"
+          puts "#{index + 1} #{wagon.type_wagon} wagon:\
+          Free volume #{wagon.free_place} | Occupied volume #{wagon.used_place}"
         end
       end
     end

@@ -2,6 +2,7 @@
 # так как будут вызываться не в родственных классах
 
 require_relative 'modules'
+
 class Station
   include Validate
   include InstanceCounter
