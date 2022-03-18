@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Методы данного класса должны быть публичны, ,так как будут вызываться не в родственных классах
 class Route
   include Validate
@@ -12,7 +14,7 @@ class Route
   end
 
   def name
-    print "From #{@stations[0].name} to #{@stations[-1].name}"
+    "From #{@stations.first.name} to #{@stations.last.name}"
   end
 
   def add_station(station)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'modules'
 
 class Train
@@ -7,8 +9,8 @@ class Train
   attr_accessor :speed, :station, :wagons, :current_station_index
   attr_reader :number, :route, :type
 
-  TRAIN_NUMBER = /^[a-zа-я0-9]{3}-?[a-zа-я0-9]{2}$/i
-  TYPES_TRAIN = /cargo|passenger/
+  TRAIN_NUMBER = /^[a-zа-я0-9]{3}-?[a-zа-я0-9]{2}$/i.freeze
+  TYPES_TRAIN = /cargo|passenger/.freeze
 
   @@instances = []
 

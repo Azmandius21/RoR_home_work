@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Методы данного класса должны быть публичны,
 # так как будут вызываться не в родственных классах
 
@@ -9,19 +11,19 @@ class Station
   attr_accessor :trains
   attr_reader :name
 
-  STATION_NAME = /^[A-ZА-Я]\w+/
+  STATION_NAME = /^[A-ZА-Я]\w+/.freeze
 
-  @@stations = []
+  @@instances = []
 
   def self.all
-    @@stations
+    @@instances
   end
 
   def initialize(name)
     @name = name
     validate!
     @trains = []
-    @@stations << self
+    @@instances << self
     register_instance
   end
 

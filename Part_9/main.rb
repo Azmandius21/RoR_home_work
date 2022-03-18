@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'station'
 require_relative 'route'
 require_relative 'train'
@@ -9,7 +11,8 @@ require_relative 'cargo_wagon'
 require_relative 'modules'
 require_relative 'railroad'
 require_relative 'datagen'
-
+require_relative 'text'
+require_relative 'create_module'
 loop do
   puts "Enter the name of the railroad or if you want to stop the program enter '0'"
   railroad = gets.chomp
