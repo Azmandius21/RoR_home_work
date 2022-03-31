@@ -10,7 +10,7 @@ require_relative 'accessor_module'
 class Station
   include Validations
   include InstanceCounter
-  include Accessor
+  extend Accessor
 
   attr_accessor_with_history :trains
   attr_reader :name

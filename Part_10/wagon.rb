@@ -5,7 +5,7 @@ require_relative 'accessor_module'
 class Wagon
   include CompanyName
   include Validations
-  include Accessor
+  extend Accessor
 
   attr_reader :total_place, :used_place, :type_wagon
 

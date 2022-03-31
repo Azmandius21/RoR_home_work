@@ -5,7 +5,7 @@ require_relative 'accessor_module'
 class Route
   include Validations
   include InstanceCounter
-  include Accessor
+  extend Accessor
 
   attr_reader :stations
 
