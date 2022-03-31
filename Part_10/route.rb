@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 require_relative 'validate_module'
+require_relative 'accessor_module'
 # Методы данного класса должны быть публичны, ,так как будут вызываться не в родственных классах
 class Route
   include Validations
   include InstanceCounter
+  include Accessor
 
   attr_reader :stations
+
+  strong_attr_accessor :@stations, Array
 
   validate :stations, :size_validation, 2
 

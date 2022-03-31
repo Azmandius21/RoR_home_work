@@ -13,6 +13,9 @@ require_relative 'railroad'
 require_relative 'datagen'
 require_relative 'text'
 require_relative 'create_module'
+require_relative 'validate_module'
+require_relative 'accessor_module'
+
 loop do
   puts "Enter the name of the railroad or if you want to stop the program enter '0'"
   railroad = gets.chomp

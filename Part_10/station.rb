@@ -5,12 +5,14 @@
 
 require_relative 'modules'
 require_relative 'validate_module'
-
+require_relative 'accessor_module'
 
 class Station
   include Validations
   include InstanceCounter
-  attr_accessor :trains
+  include Accessor
+
+  attr_accessor_with_history :trains
   attr_reader :name
 
   STATION_NAME = /^[A-ZА-Я]\w+/.freeze

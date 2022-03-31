@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 require_relative 'validate_module'
+require_relative 'accessor_module'
 
 class Wagon
   include CompanyName
   include Validations
+  include Accessor
 
   attr_reader :total_place, :used_place, :type_wagon
 

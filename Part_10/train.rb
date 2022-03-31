@@ -2,12 +2,15 @@
 
 require_relative 'modules'
 require_relative 'validate_module'
+require_relative 'accessor_module'
 
 class Train
   include Validations
   include InstanceCounter
   include CompanyName
-  attr_accessor :speed, :station, :wagons, :current_station_index
+  include Accessor
+
+  attr_accessor_with_history :speed, :station, :wagons, :current_station_index
   attr_reader :number, :route, :type
 
   TRAIN_NUMBER = /^[a-zа-я0-9]{3}-?[a-zа-я0-9]{2}$/i.freeze

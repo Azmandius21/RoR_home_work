@@ -10,8 +10,9 @@ class RailRoad
   include Create
   include Info
   include Select
+  include Accessor
 
-  attr_accessor :trains, :stations, :routes
+  attr_accessor_with_history :trains, :stations, :routes
 
   def initialize
     @stations = []
