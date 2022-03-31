@@ -10,7 +10,7 @@ class RailRoad
   include Create
   include Info
   include Select
-  include Accessor
+  extend Accessor
 
   attr_accessor_with_history :trains, :stations, :routes
 
